@@ -1,65 +1,129 @@
-import Image from "next/image";
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import { questions, personalities, PersonalityType } from './data/quizData';
+
+type Screen = 'welcome' | 'quiz' | 'result';
 
 export default function Home() {
-  return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+  const [screen, setScreen] = useState<Screen>('welcome');
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [scores, setScores] = useState<Record<PersonalityType, number>>({
+    bold: 0,
+    cozy: 0,
+    sweet: 0,
+    indulgent: 0,
+  });
+
+  const handleStart = () => {
+    setScreen('quiz');
+    setCurrentQuestion(0);
+    setScores({ bold: 0, cozy: 0, sweet: 0, indulgent: 0 });
+  };
+
+  const handleAnswer = (personality: PersonalityType) => {
+    const newScores = { ...scores, [personality]: scores[personality] + 1 };
+    setScores(newScores);
+
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setScreen('result');
+    }
+  };
+
+  const getResult = (): PersonalityType => {
+    let maxScore = 0;
+    let result: PersonalityType = 'bold';
+
+    (Object.keys(scores) as PersonalityType[]).forEach((key) => {
+      if (scores[key] > maxScore) {
+        maxScore = scores[key];
+        result = key;
+      }
+    });
+
+    return result;
+  };
+
+  // Welcome Screen
+  if (screen === 'welcome') {
+    return (
+      <div className="quiz-container">
+        <div className="quiz-card">
+          <div className="coffee-decoration" style={{ textAlign: 'center' }}>☕</div>
+          <h1 className="quiz-title">What&apos;s Your Coffee Personality?</h1>
+          <p className="quiz-subtitle">
+            Answer 5 quick questions to discover your perfect brew
           </p>
+          <button className="start-button" onClick={handleStart}>
+            Start Quiz
+          </button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </div>
+    );
+  }
+
+  // Quiz Screen
+  if (screen === 'quiz') {
+    const question = questions[currentQuestion];
+
+    return (
+      <div className="quiz-container">
+        <div className="quiz-card">
+          <p className="question-text">{question.question}</p>
+
+          {question.answers.map((answer, index) => (
+            <div
+              key={index}
+              className="answer-option"
+              onClick={() => handleAnswer(answer.personality)}
+            >
+              <span className="answer-icon">{answer.icon}</span>
+              <span>{answer.text}</span>
+            </div>
+          ))}
+
+          <div className="progress-bar">
+            {questions.map((_, index) => (
+              <div
+                key={index}
+                className={`progress-dot ${index <= currentQuestion ? 'active' : ''}`}
+              />
+            ))}
+          </div>
         </div>
-      </main>
+      </div>
+    );
+  }
+
+  // Result Screen
+  const resultType = getResult();
+  const result = personalities[resultType];
+
+  return (
+    <div className="quiz-container">
+      <div className="quiz-card result-card">
+        <Image
+          src={result.image}
+          alt={result.coffee}
+          width={200}
+          height={200}
+          className="result-image"
+        />
+        <h2 className="result-personality">You&apos;re a {result.name}!</h2>
+        <p className="result-tagline">&quot;{result.tagline}&quot;</p>
+
+        <div className="result-coffee">
+          <p className="result-coffee-label">Your perfect coffee:</p>
+          <p className="result-coffee-name">{result.coffee}</p>
+        </div>
+
+        <button className="retake-button" onClick={handleStart}>
+          Take Quiz Again
+        </button>
+      </div>
     </div>
   );
 }
