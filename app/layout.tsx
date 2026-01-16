@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://coffee-personality-quiz-test-gfg5fxs76-pipenas-projects.vercel.app"),
+  metadataBase: new URL("https://coffee-personality-quiz-test.vercel.app"),
   title: "Find Your Perfect Brew | Coffee Personality Quiz",
   description: "Answer 5 quick questions to discover your coffee personality and find your perfect brew!",
   openGraph: {
