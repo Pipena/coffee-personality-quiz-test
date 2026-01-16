@@ -217,6 +217,14 @@ body {
   margin-bottom: 20px;
 }
 
+/* Welcome screen image */
+.welcome-image {
+  display: block;
+  margin: 20px auto 30px;
+  border-radius: 16px;
+  object-fit: cover;
+}
+
 /* Stats page styles */
 .stat-row {
   margin-bottom: 20px;

@@ -66,6 +66,13 @@ export default function Home() {
           <p className="quiz-subtitle">
             Answer 5 quick questions to discover your perfect brew
           </p>
+          <Image
+            src="/couple-coffee-new.jpg"
+            alt="Couple enjoying coffee"
+            width={300}
+            height={200}
+            className="welcome-image"
+          />
           <button className="start-button" onClick={handleStart}>
             Start Quiz
           </button>
