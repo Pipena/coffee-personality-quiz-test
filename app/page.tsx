@@ -53,7 +53,7 @@ export default function Home() {
       <div className="quiz-container">
         <div className="quiz-card">
           <div className="coffee-decoration" style={{ textAlign: 'center' }}>☕</div>
-          <h1 className="quiz-title">What&apos;s Your Coffee Personality?</h1>
+          <h1 className="quiz-title">Find Your Perfect Brew</h1>
           <p className="quiz-subtitle">
             Answer 5 quick questions to discover your perfect brew
           </p>
