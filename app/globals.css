@@ -216,3 +216,46 @@ body {
   font-size: 3rem;
   margin-bottom: 20px;
 }
+
+/* Mobile responsive styles */
+@media (max-width: 600px) {
+  .quiz-card {
+    padding: 30px 20px;
+  }
+
+  .quiz-title {
+    font-size: 1.75rem;
+  }
+
+  .quiz-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .question-text {
+    font-size: 1.35rem;
+  }
+
+  .answer-option {
+    font-size: 1.1rem;
+    padding: 16px 18px;
+  }
+
+  .result-personality {
+    font-size: 1.75rem;
+  }
+
+  .result-tagline {
+    font-size: 1.15rem;
+  }
+
+  .result-coffee-name {
+    font-size: 1.35rem;
+  }
+
+  .share-button,
+  .retake-button,
+  .start-button {
+    font-size: 1.1rem;
+    padding: 14px 28px;
+  }
+}
