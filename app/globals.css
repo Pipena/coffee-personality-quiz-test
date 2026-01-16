@@ -175,6 +175,23 @@ body {
   color: var(--color-brown-dark);
 }
 
+.share-button {
+  background: var(--color-brown);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+}
+
+.share-button:hover {
+  background: var(--color-brown-dark);
+  transform: scale(1.02);
+}
+
 .retake-button {
   background: transparent;
   color: var(--color-brown);

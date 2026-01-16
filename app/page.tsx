@@ -120,6 +120,21 @@ export default function Home() {
           <p className="result-coffee-name">{result.coffee}</p>
         </div>
 
+        <button
+          className="share-button"
+          onClick={() => {
+            const text = `I'm a ${result.name}! My perfect coffee is ${result.coffee}. Take the quiz and find your brew!`;
+            const url = window.location.href;
+            if (navigator.share) {
+              navigator.share({ title: 'My Coffee Personality', text, url });
+            } else {
+              navigator.clipboard.writeText(`${text} ${url}`);
+              alert('Copied to clipboard!');
+            }
+          }}
+        >
+          Share My Result
+        </button>
         <button className="retake-button" onClick={handleStart}>
           Take Quiz Again
         </button>
