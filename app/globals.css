@@ -217,6 +217,40 @@ body {
   margin-bottom: 20px;
 }
 
+/* Stats page styles */
+.stat-row {
+  margin-bottom: 20px;
+}
+
+.stat-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.stat-name {
+  font-weight: 600;
+  color: var(--color-brown-dark);
+}
+
+.stat-count {
+  color: var(--color-brown);
+}
+
+.stat-bar-bg {
+  background: var(--color-brown-light);
+  border-radius: 10px;
+  height: 20px;
+  overflow: hidden;
+}
+
+.stat-bar-fill {
+  background: var(--color-brown);
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
 /* Mobile responsive styles */
 @media (max-width: 600px) {
   .quiz-card {

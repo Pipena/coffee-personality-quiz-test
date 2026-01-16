@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { questions, personalities, PersonalityType } from './data/quizData';
+import { supabase } from './lib/supabase';
 
 type Screen = 'welcome' | 'quiz' | 'result';
 
@@ -46,6 +47,14 @@ export default function Home() {
 
     return result;
   };
+
+  // Track result to Supabase
+  useEffect(() => {
+    if (screen === 'result') {
+      const personality = getResult();
+      supabase.from('quiz_results').insert({ personality }).then();
+    }
+  }, [screen]);
 
   // Welcome Screen
   if (screen === 'welcome') {
