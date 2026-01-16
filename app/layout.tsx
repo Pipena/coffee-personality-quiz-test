@@ -17,22 +17,25 @@ export const metadata: Metadata = {
   title: "Find Your Perfect Brew | Coffee Personality Quiz",
   description: "Answer 5 quick questions to discover your coffee personality and find your perfect brew!",
   openGraph: {
-    title: "Find Your Perfect Brew",
-    description: "What's your coffee personality? Take this fun quiz to find out!",
+    type: "website",
+    url: "https://coffee-personality-quiz-test.vercel.app",
+    title: "Find Your Perfect Brew - Coffee Personality Quiz",
+    description: "What's your coffee personality? Take this fun quiz to find out which coffee matches your vibe!",
+    siteName: "Coffee Personality Quiz",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "https://coffee-personality-quiz-test.vercel.app/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Coffee Personality Quiz",
+        alt: "Coffee Personality Quiz - Find Your Perfect Brew",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Find Your Perfect Brew",
-    description: "What's your coffee personality? Take this fun quiz to find out!",
-    images: ["/og-image.jpg"],
+    title: "Find Your Perfect Brew - Coffee Personality Quiz",
+    description: "What's your coffee personality? Take this fun quiz to find out which coffee matches your vibe!",
+    images: ["https://coffee-personality-quiz-test.vercel.app/og-image.jpg"],
   },
 };
 
