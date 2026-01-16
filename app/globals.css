@@ -184,7 +184,8 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-bottom: 12px;
+  display: block;
+  margin: 0 auto 20px auto;
 }
 
 .share-button:hover {
@@ -201,6 +202,8 @@ body {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  display: block;
+  margin: 0 auto;
 }
 
 .retake-button:hover {
